@@ -8,7 +8,7 @@
     "dev": "ts-node src/index.ts",
     "prepublishOnly": "npm run build",
     "publish:dry": "npm publish --dry-run",
-    "lint": "eslint . --ext .ts --fix",
+    "lint": "eslint src/* --ext .ts --fix",
     "prepare": "npm run build && npm run lint"
   },
   "keywords": [
@@ -26,7 +26,10 @@
     "dotenv-expand": "^12.0.1"
   },
   "devDependencies": {
-    "eslint": "^8.57.1",
+    "@clustrly/eslint": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^8.29.1",
+    "@typescript-eslint/parser": "^8.29.1",
+    "eslint": "^9.24.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
