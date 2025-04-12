@@ -1,84 +1,18 @@
 import * as dotenv from 'dotenv';
-import * as fs from 'fs';
 import * as path from 'path';
 import { expand as dotenvExpand } from 'dotenv-expand';
 
-export type Env = { [key: string]: string | undefined }
-export type LoadedEnvFiles = Array<{
-  path: string;
-  contents: string;
-  env: Env;
-}>;
-
-let cachedEnvFiles: LoadedEnvFiles = [];
-let initialEnv: Env | undefined = undefined;
-
-const loadEnv = (mode: string = 'local'): LoadedEnvFiles => {
+export const loadEnvConfig = (mode = 'local') => {
   const baseEnvPath = path.resolve(process.cwd(), `.env`);
   const modeEnvPath = path.resolve(process.cwd(), `.env.${mode}`);
-
   const dotenvFiles = [baseEnvPath, modeEnvPath];
-  const loadedEnvFiles: LoadedEnvFiles = [];
 
   dotenvFiles.forEach((filePath) => {
-    try {
-      const stats = fs.statSync(filePath);
-      if (stats.isFile()) {
-        const content = fs.readFileSync(filePath, 'utf8');
-        loadedEnvFiles.push({
-          path: filePath,
-          contents: content,
-          env: dotenvExpand(dotenv.parse(content)).parsed || {},
-        });
+      try {
+          const result = dotenv.config({ path: filePath });
+          dotenvExpand(result);
+      } catch (err) {
+          console.error(`Failed to load ${filePath}:`, err);
       }
-    } catch (err : unknown) {
-      if ((err as NodeJS.ErrnoException).code !== 'ENOENT') {
-        console.error(`Error loading env file at ${filePath}`, err);
-      }
-    }
   });
-
-  return loadedEnvFiles;
-};
-
-export const processEnv = (
-  loadedEnvFiles: LoadedEnvFiles,
-  forceReload = false
-) => {
-  if (!initialEnv) {
-    initialEnv = { ...process.env };
-  }
-
-  if (cachedEnvFiles.length > 0 && !forceReload) {
-    return { combinedEnv: { ...process.env }, loadedEnvFiles: cachedEnvFiles };
-  }
-
-  cachedEnvFiles = loadedEnvFiles;
-
-  let combinedEnv: Env = { ...initialEnv };
-
-  loadedEnvFiles.forEach((envFile) => {
-    Object.entries(envFile.env).forEach(([key, value]) => {
-      if (value !== undefined) {
-        combinedEnv[key] = value;
-      }
-    });
-  });
-
-  Object.assign(process.env, combinedEnv);
-  return { combinedEnv, loadedEnvFiles };
-};
-
-export const resetEnv = () => {
-  if (initialEnv) {
-    Object.assign(process.env, initialEnv);
-  }
-};
-
-export const loadEnvConfig = (
-  mode: string = 'local',
-  forceReload: boolean = false
-) => {
-  const loadedEnvFiles = loadEnv(mode);
-  return processEnv(loadedEnvFiles, forceReload);
 };

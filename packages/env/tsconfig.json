@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2024",  // or any other compatible target (e.g., ES2020)
-    "module": "ESNext",  // for ES Module support (use ESNext to work with imports)
-    "moduleResolution": "Node",  // ensures compatibility with node resolution
-    "esModuleInterop": true,  // allows 'import' compatibility with CommonJS modules
-    "strict": true,  // for TypeScript strict mode
-    "declaration": true,  // generates .d.ts files
-    "outDir": "dist",  // output directory for compiled files
-    "rootDir": "src",  // root directory for your source files
-    "skipLibCheck": true  // skips type checking of declaration files for performance
+    "target": "ES2021",  // Target ES Modules
+    "module": "ESNext",  // Use ES modules in compiled output
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "strict": true,
+    "declaration": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "skipLibCheck": true
   },
-  "include": ["src"]  // include the source files for compilation
+  "include": ["src"]
 }
