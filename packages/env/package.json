@@ -1,0 +1,34 @@
+{
+  "name": "@clustrly/env",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "npm run build",
+    "publish:dry": "npm publish --dry-run",
+    "lint": "eslint . --ext .ts --fix",
+    "prepare": "npm run build && npm run lint"
+  },
+  "keywords": [
+    "clustrly",
+    "env",
+    "dotenv",
+    "environment-variables",
+    "config"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "A flexible, modern environment configuration loader for Clustrly bots, supporting dotenv file expansion and dynamic variable management.",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "dotenv-expand": "^12.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
