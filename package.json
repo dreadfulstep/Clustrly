@@ -3,5 +3,8 @@
   "workspaces": [
     "packages/*",
     "apps/*"
-  ]
+  ],
+  "dependencies": {
+    "@clustrly/env": "^1.0.1"
+  }
 }
