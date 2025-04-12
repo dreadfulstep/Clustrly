@@ -1,8 +1,8 @@
 {
   "name": "@clustrly/eslint",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": ".eslintrc.js",
-  "author": "",
+  "author": "Dreadfulstep",
   "license": "ISC",
   "description": "The ESLint configuration for Clustrly projects.",
   "scripts": {
@@ -15,5 +15,9 @@
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.5.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<your-github-username>/clustrly-eslint-config.git"
+  }
 }
