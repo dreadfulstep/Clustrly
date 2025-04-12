@@ -18,6 +18,6 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/<your-github-username>/clustrly-eslint-config.git"
-  }
+    "url": "https://github.com/dreadfulstep/clustrly/tree/main/packages/eslint-config"
+    }
 }
